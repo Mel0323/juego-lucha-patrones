@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JuegoLucha.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">juego-lucha</a> &gt; <a href="index.source.html" class="el_package">com.juego.juego</a> &gt; <span class="el_source">JuegoLucha.java</span></div><h1>JuegoLucha.java</h1><pre class="source lang-java linenums">package com.juego.juego;
+
+import com.juego.model.Personaje;
+import com.juego.patrones.factory.PersonajeFactory;
+import com.juego.patrones.factory.PersonajeFactorySelector;
+
+public class JuegoLucha {
+    private Personaje jugador1;
+    private Personaje jugador2;
+
+    // Constructor original (compatibilidad)
+    public JuegoLucha(String nombre1, String nombre2) {
+<span class="nc" id="L13">        this(nombre1, nombre2, &quot;normal&quot;, &quot;normal&quot;);</span>
+<span class="nc" id="L14">    }</span>
+    
+    // Constructor con tipos de personaje
+<span class="nc" id="L17">    public JuegoLucha(String nombre1, String nombre2, String tipo1, String tipo2) {</span>
+<span class="nc" id="L18">        PersonajeFactory factory1 = PersonajeFactorySelector.getFactory(tipo1);</span>
+<span class="nc" id="L19">        PersonajeFactory factory2 = PersonajeFactorySelector.getFactory(tipo2);</span>
+        
+<span class="nc" id="L21">        this.jugador1 = factory1.crearPersonaje(nombre1);</span>
+<span class="nc" id="L22">        this.jugador2 = factory2.crearPersonaje(nombre2);</span>
+        
+<span class="nc" id="L24">        System.out.println(&quot;\n⚔️ PERSONAJES CREADOS ⚔️&quot;);</span>
+<span class="nc" id="L25">        System.out.println(jugador1.getNombre() + &quot; [&quot; + tipo1.toUpperCase() + &quot;] - &quot; + jugador1.getPuntosDeVida() + &quot; HP&quot;);</span>
+<span class="nc" id="L26">        System.out.println(jugador2.getNombre() + &quot; [&quot; + tipo2.toUpperCase() + &quot;] - &quot; + jugador2.getPuntosDeVida() + &quot; HP\n&quot;);</span>
+<span class="nc" id="L27">    }</span>
+
+    public void iniciarPelea() {
+<span class="nc" id="L30">        System.out.println(&quot;🏆 ¡LA PELEA COMIENZA! 🏆\n&quot;);</span>
+
+<span class="nc" id="L32">        int turno = 1;</span>
+<span class="nc bnc" id="L33" title="All 4 branches missed.">        while (jugador1.estaVivo() &amp;&amp; jugador2.estaVivo()) {</span>
+<span class="nc" id="L34">            System.out.println(&quot;--- TURNO &quot; + turno + &quot; ---&quot;);</span>
+<span class="nc" id="L35">            turno(jugador1, jugador2);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if (jugador2.estaVivo()) {</span>
+<span class="nc" id="L37">                turno(jugador2, jugador1);</span>
+            }
+<span class="nc" id="L39">            turno++;</span>
+<span class="nc" id="L40">            System.out.println();</span>
+        }
+
+<span class="nc" id="L43">        System.out.println(&quot;🎉 ¡FIN DE LA PELEA! 🎉&quot;);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (jugador1.estaVivo()) {</span>
+<span class="nc" id="L45">            System.out.println(&quot;👑 &quot; + jugador1.getNombre() + &quot; es el CAMPEÓN con &quot; + jugador1.getPuntosDeVida() + &quot; HP restantes.&quot;);</span>
+        } else {
+<span class="nc" id="L47">            System.out.println(&quot;👑 &quot; + jugador2.getNombre() + &quot; es el CAMPEÓN con &quot; + jugador2.getPuntosDeVida() + &quot; HP restantes.&quot;);</span>
+        }
+<span class="nc" id="L49">    }</span>
+
+    private void turno(Personaje atacante, Personaje defensor) {
+<span class="nc" id="L52">        System.out.println(&quot;Turno de &quot; + atacante.getNombre() + &quot; [HP: &quot; + atacante.getPuntosDeVida() + &quot;]&quot;);</span>
+<span class="nc" id="L53">        atacante.atacar(defensor);</span>
+<span class="nc" id="L54">        System.out.println(defensor.getNombre() + &quot; ahora tiene &quot; + defensor.getPuntosDeVida() + &quot; HP&quot;);</span>
+<span class="nc" id="L55">    }</span>
+    
+    // Getters para pruebas
+<span class="nc" id="L58">    public Personaje getJugador1() { return jugador1; }</span>
+<span class="nc" id="L59">    public Personaje getJugador2() { return jugador2; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

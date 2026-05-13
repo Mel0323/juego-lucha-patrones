@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Personaje.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">juego-lucha</a> &gt; <a href="index.source.html" class="el_package">com.juego.model</a> &gt; <span class="el_source">Personaje.java</span></div><h1>Personaje.java</h1><pre class="source lang-java linenums">package com.juego.model;
+
+import com.juego.patrones.strategy.AtaqueStrategy;
+import com.juego.patrones.strategy.AtaqueNormal;
+
+public class Personaje {
+    private String nombre;
+    private int puntosDeVida;
+    private int puntosDeVidaMaximos;
+    private AtaqueStrategy estrategiaAtaque;
+
+    // Constructor original (compatibilidad)
+    public Personaje(String nombre) {
+<span class="nc" id="L14">        this(nombre, 100);</span>
+<span class="nc" id="L15">    }</span>
+    
+    // Constructor con vida personalizada
+<span class="fc" id="L18">    public Personaje(String nombre, int puntosDeVida) {</span>
+<span class="fc" id="L19">        this.nombre = nombre;</span>
+<span class="fc" id="L20">        this.puntosDeVida = puntosDeVida;</span>
+<span class="fc" id="L21">        this.puntosDeVidaMaximos = puntosDeVida;</span>
+<span class="fc" id="L22">        this.estrategiaAtaque = new AtaqueNormal(); // estrategia por defecto</span>
+<span class="fc" id="L23">    }</span>
+
+    public void setEstrategiaAtaque(AtaqueStrategy estrategia) {
+<span class="fc" id="L26">        this.estrategiaAtaque = estrategia;</span>
+<span class="fc" id="L27">    }</span>
+
+    public void atacar(Personaje oponente) {
+<span class="fc" id="L30">        int dano = this.estrategiaAtaque.calcularDano();</span>
+<span class="fc" id="L31">        oponente.recibirDano(dano);</span>
+<span class="fc" id="L32">        System.out.println(this.nombre + &quot; realiza &quot; + this.estrategiaAtaque.getDescripcion() +</span>
+<span class="fc" id="L33">                           &quot; causando &quot; + dano + &quot; de daño a &quot; + oponente.getNombre());</span>
+<span class="fc" id="L34">    }</span>
+
+    public void recibirDano(int dano) {
+<span class="fc" id="L37">        this.puntosDeVida -= dano;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (this.puntosDeVida &lt; 0) this.puntosDeVida = 0;</span>
+<span class="fc" id="L39">    }</span>
+
+    public boolean estaVivo() {
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        return this.puntosDeVida &gt; 0;</span>
+    }
+
+    public void curar(int cantidad) {
+<span class="fc" id="L46">        this.puntosDeVida += cantidad;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (this.puntosDeVida &gt; puntosDeVidaMaximos) this.puntosDeVida = puntosDeVidaMaximos;</span>
+<span class="fc" id="L48">    }</span>
+
+    // Getters
+<span class="fc" id="L51">    public String getNombre() { return nombre; }</span>
+<span class="fc" id="L52">    public int getPuntosDeVida() { return puntosDeVida; }</span>
+<span class="nc" id="L53">    public int getPuntosDeVidaMaximos() { return puntosDeVidaMaximos; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

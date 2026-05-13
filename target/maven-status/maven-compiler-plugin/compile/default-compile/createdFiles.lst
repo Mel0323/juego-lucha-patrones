@@ -1,0 +1,12 @@
+com/juego/patrones/strategy/AtaqueStrategy.class
+com/juego/patrones/strategy/AtaqueFuerte.class
+com/juego/patrones/factory/MagoFactory.class
+com/juego/patrones/factory/PersonajeFactory.class
+com/juego/model/Personaje.class
+com/juego/patrones/factory/GuerreroFactory.class
+com/juego/patrones/strategy/AtaqueRapido.class
+com/juego/patrones/factory/PersonajeFactorySelector.class
+com/juego/juego/JuegoFacade.class
+com/juego/patrones/factory/ArqueroFactory.class
+com/juego/juego/JuegoLucha.class
+com/juego/patrones/strategy/AtaqueNormal.class
