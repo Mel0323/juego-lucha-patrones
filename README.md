@@ -1,7 +1,6 @@
 # Juego de Lucha con Patrones de Diseño
 
-[![Java CI with Maven](https://github.com/TU_USUARIO/juego-lucha-patrones/actions/workflows/ci.yml/badge.svg)](https://github.com/TU_USUARIO/juego-lucha-patrones/actions/workflows/ci.yml)
-
+[![Java CI with Maven](https://github.com/Mel0323/juego-lucha-patrones/actions/workflows/ci.yml/badge.svg)](https://github.com/Mel0323/juego-lucha-patrones/actions/workflows/ci.yml)
 ## Patrones Implementados
 - **Factory Method** (creacional)
 - **Strategy** (comportamiento)
