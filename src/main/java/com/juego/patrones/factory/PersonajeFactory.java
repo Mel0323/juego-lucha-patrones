@@ -1,37 +1,36 @@
 package com.juego.patrones.factory;
 
-import com.juego.model.Personaje;
-import com.juego.patrones.strategy.AtaqueNormal;
-import com.juego.patrones.strategy.AtaqueFuerte;
-import com.juego.patrones.strategy.AtaqueRapido;
+import com.juego.model.IPersonaje;
+import com.juego.model.PersonajeBase;
 
 public abstract class PersonajeFactory {
-    public abstract Personaje crearPersonaje(String nombre);
+    public abstract IPersonaje crearPersonaje(String nombre);
 }
 
 class GuerreroFactory extends PersonajeFactory {
     @Override
-    public Personaje crearPersonaje(String nombre) {
-        Personaje p = new Personaje(nombre, 130);
-        p.setEstrategiaAtaque(new AtaqueNormal());
-        return p;
+    public IPersonaje crearPersonaje(String nombre) {
+        return new PersonajeBase(nombre, 130);
     }
 }
 
 class MagoFactory extends PersonajeFactory {
     @Override
-    public Personaje crearPersonaje(String nombre) {
-        Personaje p = new Personaje(nombre, 80);
-        p.setEstrategiaAtaque(new AtaqueFuerte());
-        return p;
+    public IPersonaje crearPersonaje(String nombre) {
+        return new PersonajeBase(nombre, 80);
     }
 }
 
 class ArqueroFactory extends PersonajeFactory {
     @Override
-    public Personaje crearPersonaje(String nombre) {
-        Personaje p = new Personaje(nombre, 100);
-        p.setEstrategiaAtaque(new AtaqueRapido());
-        return p;
+    public IPersonaje crearPersonaje(String nombre) {
+        return new PersonajeBase(nombre, 100);
+    }
+}
+
+class NormalFactory extends PersonajeFactory {
+    @Override
+    public IPersonaje crearPersonaje(String nombre) {
+        return new PersonajeBase(nombre, 100);
     }
 }
