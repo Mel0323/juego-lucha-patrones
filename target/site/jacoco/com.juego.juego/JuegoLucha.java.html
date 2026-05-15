@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JuegoLucha.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">juego-lucha</a> &gt; <a href="index.source.html" class="el_package">com.juego.juego</a> &gt; <span class="el_source">JuegoLucha.java</span></div><h1>JuegoLucha.java</h1><pre class="source lang-java linenums">package com.juego.juego;
+
+import com.juego.model.IPersonaje;
+import com.juego.patrones.decorator.*;
+import com.juego.patrones.factory.PersonajeFactory;
+import com.juego.patrones.factory.PersonajeFactorySelector;
+import com.juego.patrones.observer.Observer;
+import com.juego.patrones.observer.Subject;
+
+public class JuegoLucha implements Observer {
+    private IPersonaje jugador1;
+    private IPersonaje jugador2;
+<span class="nc" id="L13">    private boolean juegoTerminado = false;</span>
+
+    // Constructor con todos los decoradores posibles
+    public JuegoLucha(String nombre1, String nombre2, String tipo1, String tipo2,
+                      boolean espada1, boolean espada2, boolean escudo1, boolean escudo2,
+                      boolean arco1, boolean arco2, boolean flechaVeneno1, boolean flechaVeneno2,
+<span class="nc" id="L19">                      boolean baston1, boolean baston2, boolean amuleto1, boolean amuleto2) {</span>
+        
+<span class="nc" id="L21">        PersonajeFactory factory1 = PersonajeFactorySelector.getFactory(tipo1);</span>
+<span class="nc" id="L22">        PersonajeFactory factory2 = PersonajeFactorySelector.getFactory(tipo2);</span>
+        
+<span class="nc" id="L24">        IPersonaje p1 = factory1.crearPersonaje(nombre1);</span>
+<span class="nc" id="L25">        IPersonaje p2 = factory2.crearPersonaje(nombre2);</span>
+        
+        // Aplicar decoradores a Jugador 1 según su tipo
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (tipo1.equals(&quot;guerrero&quot;)) {</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">            if (espada1) p1 = new EspadaDecorator(p1);</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (escudo1) p1 = new EscudoDecorator(p1);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        } else if (tipo1.equals(&quot;arquero&quot;)) {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (arco1) p1 = new ArcoDecorator(p1);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">            if (flechaVeneno1) p1 = new FlechaVenenoDecorator(p1);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        } else if (tipo1.equals(&quot;mago&quot;)) {</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if (baston1) p1 = new BastonMagicoDecorator(p1);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if (amuleto1) p1 = new AmuletoDecorator(p1);</span>
+        } else {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (espada1) p1 = new EspadaDecorator(p1);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (escudo1) p1 = new EscudoDecorator(p1);</span>
+        }
+        
+        // Aplicar decoradores a Jugador 2 según su tipo
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (tipo2.equals(&quot;guerrero&quot;)) {</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (espada2) p2 = new EspadaDecorator(p2);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            if (escudo2) p2 = new EscudoDecorator(p2);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        } else if (tipo2.equals(&quot;arquero&quot;)) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (arco2) p2 = new ArcoDecorator(p2);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (flechaVeneno2) p2 = new FlechaVenenoDecorator(p2);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        } else if (tipo2.equals(&quot;mago&quot;)) {</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (baston2) p2 = new BastonMagicoDecorator(p2);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (amuleto2) p2 = new AmuletoDecorator(p2);</span>
+        } else {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if (espada2) p2 = new EspadaDecorator(p2);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            if (escudo2) p2 = new EscudoDecorator(p2);</span>
+        }
+        
+<span class="nc" id="L57">        this.jugador1 = p1;</span>
+<span class="nc" id="L58">        this.jugador2 = p2;</span>
+        
+        // Registrar observadores
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (this.jugador1 instanceof Subject) {</span>
+<span class="nc" id="L62">            ((Subject) this.jugador1).addObserver(this);</span>
+        }
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this.jugador2 instanceof Subject) {</span>
+<span class="nc" id="L65">            ((Subject) this.jugador2).addObserver(this);</span>
+        }
+        
+<span class="nc" id="L68">        System.out.println(&quot;\n⚔️ PERSONAJES CREADOS ⚔️&quot;);</span>
+<span class="nc" id="L69">        System.out.println(p1.getNombre() + &quot; [&quot; + tipo1.toUpperCase() + &quot;] - &quot; + p1.getPuntosDeVida() + &quot; HP&quot;);</span>
+<span class="nc" id="L70">        System.out.println(p2.getNombre() + &quot; [&quot; + tipo2.toUpperCase() + &quot;] - &quot; + p2.getPuntosDeVida() + &quot; HP\n&quot;);</span>
+<span class="nc" id="L71">    }</span>
+
+    public void iniciarPelea() {
+<span class="nc" id="L74">        System.out.println(&quot;🏆 ¡LA PELEA COMIENZA! 🏆\n&quot;);</span>
+
+<span class="nc" id="L76">        int turno = 1;</span>
+<span class="nc bnc" id="L77" title="All 6 branches missed.">        while (!juegoTerminado &amp;&amp; jugador1.estaVivo() &amp;&amp; jugador2.estaVivo()) {</span>
+<span class="nc" id="L78">            System.out.println(&quot;--- TURNO &quot; + turno + &quot; ---&quot;);</span>
+<span class="nc" id="L79">            realizarTurno(jugador1, jugador2);</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">            if (!juegoTerminado &amp;&amp; jugador2.estaVivo()) {</span>
+<span class="nc" id="L81">                realizarTurno(jugador2, jugador1);</span>
+            }
+<span class="nc" id="L83">            turno++;</span>
+<span class="nc" id="L84">            System.out.println();</span>
+        }
+
+<span class="nc" id="L87">        System.out.println(&quot;🎉 ¡FIN DE LA PELEA! 🎉&quot;);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        if (jugador1.estaVivo()) {</span>
+<span class="nc" id="L89">            System.out.println(&quot;👑 &quot; + jugador1.getNombre() + &quot; es el CAMPEÓN con &quot; + jugador1.getPuntosDeVida() + &quot; HP restantes.&quot;);</span>
+        } else {
+<span class="nc" id="L91">            System.out.println(&quot;👑 &quot; + jugador2.getNombre() + &quot; es el CAMPEÓN con &quot; + jugador2.getPuntosDeVida() + &quot; HP restantes.&quot;);</span>
+        }
+<span class="nc" id="L93">    }</span>
+
+    private void realizarTurno(IPersonaje atacante, IPersonaje defensor) {
+<span class="nc" id="L96">        System.out.println(&quot;Turno de &quot; + atacante.getNombre() + &quot; [HP: &quot; + atacante.getPuntosDeVida() + &quot;]&quot;);</span>
+<span class="nc" id="L97">        atacante.atacar(defensor);</span>
+<span class="nc" id="L98">    }</span>
+
+    @Override
+    public void update(String evento, IPersonaje personaje) {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (evento.equals(&quot;MURIO&quot;)) {</span>
+<span class="nc" id="L103">            System.out.println(&quot;💀 ¡&quot; + personaje.getNombre() + &quot; ha sido derrotado! 💀&quot;);</span>
+<span class="nc" id="L104">            juegoTerminado = true;</span>
+        }
+<span class="nc" id="L106">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

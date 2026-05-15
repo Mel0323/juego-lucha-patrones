@@ -1,0 +1,6 @@
+com/juego/patrones/observer/ObserverTest$TestObserver.class
+com/juego/model/PersonajeBaseTest.class
+com/juego/patrones/observer/ObserverTest.class
+com/juego/patrones/decorator/DecoratorTest.class
+com/juego/juego/JuegoLuchaMockitoTest.class
+com/juego/patrones/factory/FactoryTest.class

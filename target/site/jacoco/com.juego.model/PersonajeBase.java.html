@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PersonajeBase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">juego-lucha</a> &gt; <a href="index.source.html" class="el_package">com.juego.model</a> &gt; <span class="el_source">PersonajeBase.java</span></div><h1>PersonajeBase.java</h1><pre class="source lang-java linenums">package com.juego.model;
+
+import com.juego.patrones.observer.Observer;
+import com.juego.patrones.observer.Subject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class PersonajeBase implements IPersonaje, Subject {
+    private String nombre;
+    private int puntosDeVida;
+    private int puntosDeVidaMaximos;
+<span class="fc" id="L13">    private List&lt;Observer&gt; observadores = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L14">    private Random rand = new Random();</span>
+
+<span class="fc" id="L16">    public PersonajeBase(String nombre, int puntosDeVida) {</span>
+<span class="fc" id="L17">        this.nombre = nombre;</span>
+<span class="fc" id="L18">        this.puntosDeVida = puntosDeVida;</span>
+<span class="fc" id="L19">        this.puntosDeVidaMaximos = puntosDeVida;</span>
+<span class="fc" id="L20">    }</span>
+
+    public PersonajeBase(String nombre) {
+<span class="nc" id="L23">        this(nombre, 100);</span>
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public void atacar(IPersonaje oponente) {
+<span class="fc" id="L28">        int dano = rand.nextInt(21) + 10; // 10-30</span>
+<span class="fc" id="L29">        System.out.println(this.nombre + &quot; ataca causando &quot; + dano + &quot; de daño a &quot; + oponente.getNombre());</span>
+<span class="fc" id="L30">        oponente.recibirDano(dano);</span>
+<span class="fc" id="L31">    }</span>
+
+    @Override
+    public void recibirDano(int dano) {
+<span class="fc" id="L35">        this.puntosDeVida -= dano;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (this.puntosDeVida &lt; 0) {</span>
+<span class="fc" id="L37">            this.puntosDeVida = 0;</span>
+        }
+<span class="fc" id="L39">        System.out.println(this.nombre + &quot; ahora tiene &quot; + this.puntosDeVida + &quot; HP&quot;);</span>
+        
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (this.puntosDeVida == 0) {</span>
+<span class="fc" id="L42">            notifyObservers(&quot;MURIO&quot;);</span>
+        } else {
+<span class="fc" id="L44">            notifyObservers(&quot;RECIBIO_DANO&quot;);</span>
+        }
+<span class="fc" id="L46">    }</span>
+
+    @Override
+    public boolean estaVivo() {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        return this.puntosDeVida &gt; 0;</span>
+    }
+
+    @Override
+    public String getNombre() {
+<span class="fc" id="L55">        return this.nombre;</span>
+    }
+
+    @Override
+    public int getPuntosDeVida() {
+<span class="fc" id="L60">        return this.puntosDeVida;</span>
+    }
+
+    public int getPuntosDeVidaMaximos() {
+<span class="nc" id="L64">        return puntosDeVidaMaximos;</span>
+    }
+
+    // Métodos de Subject
+    @Override
+    public void addObserver(Observer o) {
+<span class="fc" id="L70">        observadores.add(o);</span>
+<span class="fc" id="L71">    }</span>
+
+    @Override
+    public void removeObserver(Observer o) {
+<span class="fc" id="L75">        observadores.remove(o);</span>
+<span class="fc" id="L76">    }</span>
+
+    @Override
+    public void notifyObservers(String evento) {
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        for (Observer o : observadores) {</span>
+<span class="fc" id="L81">            o.update(evento, this);</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
